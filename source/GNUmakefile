@@ -1,9 +1,10 @@
 CC := /usr/bin/clang
 Clang_Flag += -I./
+Clang_Flag += -I./library/
 Clang_Flag += -g
 
 source += main.c
-source += tinyosc/tinyosc.c
+source += library/tinyosc/tinyosc.c
 
 .PHONY += default
 

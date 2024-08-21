@@ -1,4 +1,5 @@
 #include <error.h>
+#include <iso646.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -66,13 +67,16 @@ void SubcommandChatbox(int argc, char *argv[], int arg_now)
 int main(int argc, char *argv[])
 {
     if (argc < 2) {
-        printf("No action selected\n");
+        printf("No arguments, run with help/--help/-h get more infomation\n");
         exit(kExitErrorStd);
     }
 
     for (int i = 1; i < argc; i++) {
-        if (strcmp(argv[i], "help") == 0) {
-            printf("So, hey shell, print a help!\n");
+        if (strcmp(argv[i], "help") == 0 or strcmp(argv[i], "--help") == 0 or strcmp(argv[i], "-h") == 0) {
+            printf("Usage: execName <MODE> [--help | -h]\n\n");
+            printf("MODE:\n");
+            printf("\thelp\t\tShow help info, --help also will do this\n");
+            printf("\tchatbox\t\tSend chatbox message\n");
             exit(kExitSuccess);
         } else if (strcmp(argv[i], "chatbox") == 0) {
             SubcommandChatbox(argc, argv, i);
