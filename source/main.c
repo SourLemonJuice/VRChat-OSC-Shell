@@ -13,8 +13,9 @@
 enum ExitCode {
     kExitSuccess = EXIT_SUCCESS,
     kExitErrorStd = EXIT_FAILURE,
-    kExitErrorGetFlag,
-    kExitErrorSocket,
+    kExitErrorGetFlag = 10,
+    kExitErrorSocket = 20,
+    kExitErrorVrchatLimit = 30,
 };
 
 void SubcommandChatbox(int argc, char *argv[], int arg_now)
@@ -33,7 +34,7 @@ void SubcommandChatbox(int argc, char *argv[], int arg_now)
     int message_len = strlen(message);
     if (message_len > 144) {
         printf("VRChat limited chatbox characters to 144, but the input is %d\n", message_len);
-        exit(kExitErrorStd); // TODO add new error type
+        exit(kExitErrorVrchatLimit);
     }
 
     // VRChat OSC server socket
@@ -55,7 +56,7 @@ void SubcommandChatbox(int argc, char *argv[], int arg_now)
         perror("Send message error");
         exit(kExitErrorSocket);
     }
-    printf("Sended message: \"%s\"\n", message);
+    printf("Sended message ->|%s\n", message);
 
     close(fd);
 
