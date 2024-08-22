@@ -6,7 +6,7 @@ A command line tool use for control the VRChat OSC system
 
 Run with `help`/`--help`/`-h` to get help information
 
-Chatbox mode look like this: `execName chatbox "Hello Chatbox"`
+Chatbox mode look like this: `vrchat-osc chatbox "Hello Chatbox"`
 
 Every flags are all unstable
 

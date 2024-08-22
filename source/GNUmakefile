@@ -3,14 +3,16 @@ Clang_Flag += -I./
 Clang_Flag += -I./library/
 Clang_Flag += -g
 
+exec_name := vrchat-osc
+
 source += main.c
 source += library/tinyosc/tinyosc.c
 
 .PHONY += default
 
-default: main.out
+default: ${exec_name}
 
-main.out: ${source}
+${exec_name}: ${source}
 	${CC} ${source} \
-		--output main.out \
+		--output ${exec_name} \
 		${Clang_Flag}
