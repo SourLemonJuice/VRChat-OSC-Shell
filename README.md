@@ -10,6 +10,12 @@ Chatbox mode look like this: `vrchat-osc chatbox "Hello Chatbox"`
 
 Every flags are all unstable
 
+## Toy/Example
+
+There is some useful or interesting script in the folder [toy/](toy/)
+
+This is Unix `(・ω< )★`
+
 ## Feature
 
 - [x] Chatbox
@@ -23,4 +29,5 @@ Every flags are all unstable
 
 TODO, TODO, TODO, TODO
 
-Just some garbage, but it's works now
+Just some garbage, but it's works now.\
+I just want to make a tool for gaming temporarily
