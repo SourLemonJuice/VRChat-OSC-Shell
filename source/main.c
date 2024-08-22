@@ -126,7 +126,7 @@ void SubcommandTyping(int argc, char *argv[], int arg_now)
 int main(int argc, char *argv[])
 {
     if (argc < 2) {
-        printf("No arguments, run with help/--help/-h get more infomation\n");
+        printf("No arguments, run with help/--help/-h get more information\n");
         exit(kExitErrorStd);
     }
 
