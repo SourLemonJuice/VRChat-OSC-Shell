@@ -22,7 +22,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v4.3.6
       with:
-        name: main.out
-        path: source/main.out
+        name: vrchat-osc
+        path: source/vrchat-osc
         if-no-files-found: error
         retention-days: 7
