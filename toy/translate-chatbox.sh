@@ -13,6 +13,6 @@ trans_target_code="en"
 echo "Input message on the next line:"
 input_content="$(shell-readline)"
 translate_content=$(echo "$input_content" | trans -brief --target "$trans_target_code")
-./vrchat-osc chatbox "${input_content} |-> ${trans_target_code}| ${translate_content}"
+./vrchat-osc chatbox "${input_content}" "|src -> ${trans_target_code}|" "${translate_content}"
 
 ./vrchat-osc typing off
