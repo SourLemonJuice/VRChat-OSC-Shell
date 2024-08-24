@@ -22,14 +22,29 @@ enum ExitCode {
 void SubcommandChatbox(int argc, char *argv[], int arg_now)
 {
     arg_now++;
-    if (argc - 1 > arg_now) {
-        printf("Chatbox only need one argument, but now has %d\n", argc - arg_now);
-        exit(kExitErrorGetFlag);
-    }
 
-    char *message = "Hello VRChat OSC(Chatbox)";
-    if (arg_now < argc)
-        message = argv[arg_now];
+    char *message;
+    if (arg_now >= argc) {
+        message = "Hello VRChat Chatbox OSC > This message sended by VRChat-OSC-Shell";
+    } else {
+        size_t msg_size = 0;
+        bool first_argv = true;
+
+        while (arg_now < argc) {
+            msg_size += strlen(argv[arg_now]) + 1 + sizeof('\n'); // \n may not a char but a int
+            message = realloc(message, msg_size);
+
+            // the first line don't need \n at start
+            if (first_argv == true) {
+                first_argv = false;
+            } else {
+                strncat(message, "\n", msg_size);
+            }
+            strncat(message, argv[arg_now], msg_size);
+
+            arg_now++;
+        }
+    }
 
     // VRChat chatbox only allow message of less than 144 characters
     int message_len = strlen(message);
@@ -57,7 +72,10 @@ void SubcommandChatbox(int argc, char *argv[], int arg_now)
         perror("Send message error");
         exit(kExitErrorSocket);
     }
-    printf("Sended message ->|%s\n", message);
+    printf("Sended message to localhost:9000 <-|\n%s\n", message);
+    for (int i = 0; i < 24; i++)
+        putchar('-');
+    putchar('\n');
 
     close(fd);
 
@@ -132,11 +150,11 @@ int main(int argc, char *argv[])
 
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "help") == 0 or strcmp(argv[i], "--help") == 0 or strcmp(argv[i], "-h") == 0) {
-            printf("Usage: vrchat-osc <MODE> [--help | -h]\n\n");
+            printf("Usage: vrchat-osc <MODE> [Mode args] [--help | -h]\n\n");
             printf("MODE:\n");
-            printf("\thelp\t\t\tShow help info, --help also will do this\n");
-            printf("\tchatbox <string>\tSend chatbox message\n");
-            printf("\ttyping <on/off>\t\tControl the typing indicator on or off\n");
+            printf("\thelp\t\t\t\tShow help info, --help also will do this\n");
+            printf("\tchatbox [strings] [...]\t\tSend chatbox message. Each argument will converted into a separate line\n");
+            printf("\ttyping <on/off>\t\t\tControl the typing indicator on or off\n");
             exit(kExitSuccess);
         } else if (strcmp(argv[i], "chatbox") == 0) {
             SubcommandChatbox(argc, argv, i);
