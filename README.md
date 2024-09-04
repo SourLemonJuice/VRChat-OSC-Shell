@@ -31,3 +31,7 @@ TODO, TODO, TODO, TODO
 
 Just some garbage, but it's works now.\
 I just want to make a tool for gaming temporarily
+
+## License
+
+Published under MIT license
